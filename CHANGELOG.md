@@ -3,6 +3,14 @@
 All notable changes to SuperHumanizer will be documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.2.0] — 2026-06-26
+
+### Added
+- Onboarding průvodce v `/new-tov` — místo suchého ptaní obslouží uživatele: nabídne výčet zdrojů, projde s ním nálezy („tohle je tvůj marker, sedí?"), nechá vybrat styly a schválit draft
+- Bilingvní šablony nabídky zdrojů (CZ + EN)
+- Sekce „První spuštění" — uvítání a volba základní očista vs. postavit vlastní hlas
+- Ochrana proti cizí ruce — vzorky zjevně psané AI/někým jiným se neberou jako vzor hlasu
+
 ## [1.1.0] — 2026-06-26
 
 ### Added

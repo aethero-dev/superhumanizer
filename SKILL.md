@@ -1,6 +1,6 @@
 ---
 name: SuperHumanizer
-version: 1.1.0
+version: 1.2.0
 description: |
   Odstraň znaky AI-generovaného psaní z textu a přepiš ho do přirozeného lidského stylu.
   Použij kdykoliv uživatel napíše /humanize, "humanizuj", "přepiš jako člověk", "zní to jako AI",
@@ -149,28 +149,87 @@ Pokud slug neexistuje, vypiš dostupné profily (jako `/list-tov`) a zeptej se.
 
 ---
 
-## /new-tov — vytvoř nový hlas (wizard)
+## /new-tov — vytvoř nový hlas (průvodce)
 
-Cíl: postavit nový `<slug>.md` a uložit ho. Veď uživatele krok po kroku, neptej se na všechno najednou.
+Cíl: postavit nový `<slug>.md` a uložit ho. **Neprostě se neptej — obsluž uživatele.** Veď ho krok
+za krokem, sám nabídni z čeho umíš číst, projdi s ním nálezy a nech ho rozhodnout. Veď celý dialog
+**v jazyce uživatele** (píše česky → česky; anglicky → anglicky). Šablony nabídky níže.
+
+**Kdy průvodce spustit:** na `/new-tov`, NEBO při úplně prvním použití skillu, když uživatel nemá
+žádný profil a chce si ho postavit (viz „První spuštění" níže).
 
 1. **Název a slug.** Zeptej se, jak hlas pojmenovat („osobní David", „aethero firemní"…) a odvoď
    slug s jednotnou koncovkou `_tov` (`dk_tov`, `ae_tov`). Tenhle slug se použije všude stejně —
    v příkazu i v názvu souboru. Pokud slug existuje, nabídni přepsání nebo jiný název.
 2. **Role.** Jednou větou: kdy se tenhle hlas používá. Uloží se do „Kdo / kdy použít".
-3. **Zdroje ukázek.** Nabídni a posbírej z čehokoliv dostupného (čím víc registrů, tím lepší):
-   - **Slack** — konverzace uživatele (DM i kanály); použij Slack MCP, hledej zprávy psané JÍM.
-   - **Gmail** — odeslané maily; přes Gmail MCP, filtruj delší, jím psané (ne forwardy/jednovětné).
-   - **Veřejné posty** — texty co dává ven (LinkedIn, blog…); pokud nejsou přístupné přes MCP,
-     popros o vložení nebo odkaz.
-   - **Chat tady** — jak píše v této a minulých Claude Code session.
+3. **Nabídni zdroje (výčet — ať si vybere).** Ukaž, z čeho umíš číst, a co každý zdroj dává.
+   Čím víc registrů, tím přesnější hlas. Použij šablonu nabídky (CZ/EN) níže. Zdroje:
+   - **Slack** — konverzace uživatele (DM i kanály); přes Slack MCP, hledej zprávy psané JÍM. (neformální)
+   - **Gmail** — odeslané maily; přes Gmail MCP, filtruj delší, jím psané (ne forwardy/jednovětné). (poloformální)
+   - **Google Docs / Drive** — delší dokumenty, co psal. (formální)
+   - **Veřejné posty** — LinkedIn / blog / web, co dává ven; pokud nejsou přes MCP, popros o odkaz/vložení.
+   - **Chat tady** — jak píše v této a minulých session.
    - **Ručně vložené ukázky** — vždy funkční záloha; popros o 3–5 úryvků.
    Když některý zdroj není dostupný, řekni to a jeď dál s tím, co je.
-4. **Analýza.** Projeď posbírané vzorky a vytáhni vzorce hlasu (stejných 6 os jako voice calibration
-   + oslovení/podpis/emoji). Pokud máš víc registrů (formální mail vs hovorový Slack), zachyť rozsah:
-   popiš, kdy hlas přepíná mezi formálnějším a uvolněnějším.
-5. **Ulož.** Zapiš `<slug>.md` (např. `dk_tov.md`) do `~/.claude/skills/.superhumanizer-tov/`.
-6. **Potvrď.** Řekni uživateli: jak se profil jmenuje, čím ho spustí (`/humanize-<slug>`), kam se
-   uložil a jak ho upravit (znovu `/new-tov` se stejným názvem, nebo ručně editovat ten soubor).
+4. **Posbírej a projdi nálezy s uživatelem.** Z vybraných zdrojů vytáhni vzorky. Pak mu **vrať, co jsi
+   našel** — 3–5 charakteristických markerů jeho hlasu („tohle se mi líbí / tohle je pro tebe typické:
+   krátké údery, žádný em dash, check-otázka na konci"). Nech ho potvrdit, opravit nebo doplnit.
+   Pozor na cizí ruku: pokud vzorek zjevně psala AI/někdo jiný (podpis „Sent using…", neutrální
+   korporátní tón), nepoužívej ho jako vzor — řekni to.
+5. **Nech vybrat styly/registry.** Zeptej se, které tóny chce mít v profilu — hovorový, formální, oba,
+   nebo víc person (→ víc profilů). Zachyť rozsah: kdy hlas přepíná mezi formálnějším a uvolněnějším.
+6. **Ukaž draft profilu ke schválení.** Shrň vzorce hlasu (6 os voice calibration + oslovení/podpis/emoji
+   + anti-vzorce) a nech doladit, než uložíš.
+7. **Ulož.** Zapiš `<slug>.md` (např. `dk_tov.md`) do `~/.claude/skills/.superhumanizer-tov/`.
+8. **Potvrď a navigačně uzavři.** Řekni: jak se profil jmenuje, čím ho spustí (`/humanize-<slug>`),
+   kam se uložil a jak ho upravit (znovu `/new-tov` se stejným názvem, nebo ručně editovat soubor).
+
+### Šablona nabídky zdrojů — CZ
+
+```
+Postavím ti tvůj hlas. Umím si tě „přečíst" z těchhle zdrojů — vyber, co chceš použít
+(čím víc, tím přesnější budeš):
+
+  • Slack — jak píšeš týmu a kolegům (neformální, hovorový tón)
+  • Gmail — tvoje odeslané maily (poloformální, klientský tón)
+  • Google Docs / Drive — delší věci, co jsi psal (formální)
+  • Veřejné posty — LinkedIn, blog, web (hoď mi odkaz nebo text)
+  • Tenhle chat — jak píšeš mně
+  • Vlastní ukázky — vlož 3–5 úryvků, které tě vystihují
+
+Co z toho mám projet? A jaké tóny chceš mít — hovorový, formální, nebo oba?
+```
+
+### Šablona nabídky zdrojů — EN
+
+```
+Let's build your voice. I can "read" you from these sources — pick what to use
+(the more, the closer it'll sound like you):
+
+  • Slack — how you write to your team (informal, conversational tone)
+  • Gmail — your sent emails (semi-formal, client tone)
+  • Google Docs / Drive — longer things you've written (formal)
+  • Public posts — LinkedIn, blog, website (drop me a link or the text)
+  • This chat — how you write to me
+  • Your own samples — paste 3–5 snippets that capture you
+
+Which should I go through? And which tones do you want — casual, formal, or both?
+```
+
+---
+
+## První spuštění
+
+Když skill běží poprvé a uživatel nemá žádný ToV profil, krátce ho přivítej a dej mu na výběr
+(v jeho jazyce). Nepřepisuj nic, dokud se nerozhodne.
+
+**CZ:** „Tohle je SuperHumanizer — odstraní z textu AI stopy a přepíše ho lidsky. Můžu hned udělat
+základní očistu (`/humanize-without-tov`), nebo ti nejdřív postavím tvůj vlastní hlas, ať to zní přímo
+jako ty (`/new-tov`). Co radši?"
+
+**EN:** „This is SuperHumanizer — it strips AI tells and rewrites text to sound human. I can do a quick
+basic cleanup now (`/humanize-without-tov`), or first build your own voice so it sounds like you
+(`/new-tov`). Which do you prefer?"
 
 ---
 

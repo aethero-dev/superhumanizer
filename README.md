@@ -63,6 +63,26 @@ Writing sample: [paste your own writing here]
 
 ---
 
+## Named voices (ToV profiles)
+
+Build as many saved voices as you like — one per role or persona — and write in any of them on demand.
+
+```
+/new-tov              ← guided setup: names the voice, reads your sources, builds the profile
+/humanize-dk_tov      ← rewrite in the "dk_tov" voice
+/list-tov             ← list your saved voices
+/humanize-without-tov ← basic cleanup, no profile
+```
+
+`/new-tov` doesn't just ask questions — it walks you through it (in your language, EN or CZ). It offers
+the sources it can read you from (Slack, Gmail, Google Docs, public posts, this chat, or pasted samples),
+shows you the markers it found, lets you pick which tones to capture, and confirms a draft before saving.
+
+Profiles are stored **outside the repo** (`~/.claude/skills/.superhumanizer-tov/`) so your personal data
+never lands in version control. The slug is identical everywhere: file `dk_tov.md` ↔ command `/humanize-dk_tov`.
+
+---
+
 ## Example
 
 **Input (typical AI output):**

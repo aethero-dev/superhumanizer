@@ -63,6 +63,26 @@ Ukázka mého psaní: [vlož vlastní text]
 
 ---
 
+## Pojmenované hlasy (ToV profily)
+
+Vytvoř si libovolný počet uložených hlasů — jeden na každou roli/personu — a piš kterýmkoliv z nich.
+
+```
+/new-tov              ← průvodce: pojmenuje hlas, přečte tvoje zdroje, postaví profil
+/humanize-dk_tov      ← přepiš hlasem „dk_tov"
+/list-tov             ← vypiš uložené hlasy
+/humanize-without-tov ← základní očista, bez profilu
+```
+
+`/new-tov` se neptá suše — provede tě tím (v tvém jazyce, CZ i EN). Nabídne, z čeho tě umí přečíst
+(Slack, Gmail, Google Docs, veřejné posty, tenhle chat, nebo vložené ukázky), ukáže ti nalezené markery
+tvého hlasu, nechá tě vybrat tóny a před uložením potvrdit draft.
+
+Profily se ukládají **mimo repo** (`~/.claude/skills/.superhumanizer-tov/`), aby tvoje osobní data nikdy
+neskončila ve verzování. Slug je všude stejný: soubor `dk_tov.md` ↔ příkaz `/humanize-dk_tov`.
+
+---
+
 ## Příklad
 
 **Vstup (typický AI výstup):**
