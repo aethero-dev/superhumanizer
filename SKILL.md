@@ -1,6 +1,6 @@
 ---
 name: SuperHumanizer
-version: 1.4.1
+version: 1.4.2
 description: |
   Odstraň znaky AI-generovaného psaní z textu a přepiš ho do přirozeného lidského stylu.
   Použij kdykoliv uživatel napíše /humanize, "humanizuj", "přepiš jako člověk", "zní to jako AI",
@@ -432,6 +432,11 @@ robust, seamless, intuitive, powerful, transformative
 **Vague attributions:** experts suggest, research shows, studies indicate, many believe
 
 **Rule of three:** nutkavé seskupování do trojic adjektiv, příkladů, bodů
+
+**Negative antithesis (not X, but Y):** „It's not just a tool, it's a revolution.", „This isn't about X.
+It's about Y.", „Don't think of it as X — think of it as Y.", „It's not a bug, it's a feature." Signature
+ChatGPT move; sounds preachy and inflated. Say Y directly, or keep the contrast only if it carries a real
+surprise. (CZ ekvivalent viz „Negativní antiteze" v české sekci.)
 
 **Filler phrases:** it is worth noting, it is important to mention, needless to say
 

@@ -3,6 +3,11 @@
 All notable changes to SuperHumanizer will be documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.4.2] — 2026-06-26
+
+### Added
+- EN ekvivalent „negative antithesis" („It's not just X, it's Y") — signature ChatGPT tik; doplněn do anglických vzorců k páru s CZ verzí
+
 ## [1.4.1] — 2026-06-26
 
 ### Added
