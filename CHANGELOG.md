@@ -3,6 +3,11 @@
 All notable changes to SuperHumanizer will be documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.4.1] — 2026-06-26
+
+### Added
+- CZ vzorec „negativní antiteze" — kontrastní dvojka „není X, je Y" („Tohle není bonus. To je vstupní podmínka.") jako AI/reklamní tik k odstranění
+
 ## [1.4.0] — 2026-06-26
 
 ### Added

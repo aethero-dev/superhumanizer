@@ -1,6 +1,6 @@
 ---
 name: SuperHumanizer
-version: 1.4.0
+version: 1.4.1
 description: |
   Odstraň znaky AI-generovaného psaní z textu a přepiš ho do přirozeného lidského stylu.
   Použij kdykoliv uživatel napíše /humanize, "humanizuj", "přepiš jako člověk", "zní to jako AI",
@@ -401,6 +401,11 @@ Adresovat problém, Navigovat složitost, Fascinující svět X
 **Přivlastňovací zájmena navíc:** "Otevřel své oči a vzal svůj telefon" → "Otevřel oči a vzal telefon"
 
 **Pravidlo tří:** Rozbij trojice: "rychlá, spolehlivá a intuitivní" → "rychlá, na ovládání nepotřebuješ školení"
+
+**Negativní antiteze ("není X, je Y"):** Dramatická kontrastní dvojka — "Tohle není bonus. To je
+vstupní podmínka.", "Není to jen nástroj, je to jiná liga.", "Nejde o cenu, jde o hodnotu." AI a
+reklamní copy ji přepínají pořád; působí poučně a nafoukle. Řekni Y rovnou, nebo kontrast nech jen
+když nese reálné překvapení. "Tohle není bonus. To je vstupní podmínka." → "Bez toho za hranice neprodáš."
 
 **Tautologická zdvojení:** Smaž jedno: různé a rozmanité, efektivní a účinné, důležitý a zásadní
 
