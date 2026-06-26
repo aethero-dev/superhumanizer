@@ -3,6 +3,16 @@
 All notable changes to SuperHumanizer will be documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.5.0] — 2026-06-26
+
+### Changed
+- **Repo je teď Claude Code plugin + marketplace** — instalace přes `/plugin marketplace add aethero-dev/superhumanizer` + `/plugin install superhumanizer@aethero`, s auto-update (nové verze dotečou samy, žádné re-clone)
+- `SKILL.md` přesunut do `skills/superhumanizer/` (plugin struktura)
+- README (EN+CS): plugin jako doporučená instalace; git clone zůstává jako fallback bez auto-update
+
+### Added
+- `.claude-plugin/plugin.json` + `.claude-plugin/marketplace.json` (repo je svůj vlastní marketplace)
+
 ## [1.4.2] — 2026-06-26
 
 ### Added

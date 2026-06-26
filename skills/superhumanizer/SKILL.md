@@ -1,6 +1,6 @@
 ---
 name: SuperHumanizer
-version: 1.4.2
+version: 1.5.0
 description: |
   Odstraň znaky AI-generovaného psaní z textu a přepiš ho do přirozeného lidského stylu.
   Použij kdykoliv uživatel napíše /humanize, "humanizuj", "přepiš jako člověk", "zní to jako AI",
@@ -563,7 +563,7 @@ Flag jen **clustery** příznaků, ne izolované instance:
 - [bejek/humanizer-czech](https://github.com/bejek/humanizer-czech) — Martin Čapoun, CZ vzorce (MIT, 21 ⭐)
 - [harshaneel/humanize](https://github.com/harshaneel/humanize) — Harshaneel Gokhale, vědecký rámec + /ai-check (MIT, 52 ⭐)
 - Wu et al. 2025, Mitchell et al. 2023, AAAI 2025 shared task corpus
-- Plné poděkování a licenční doložky: viz [CREDITS.md](CREDITS.md)
+- Plné poděkování a licenční doložky: viz [CREDITS.md](../../CREDITS.md)
 
 <!--
   ── INTERNÍ / ROADMAP: ToV profil z externího brand-voice zdroje (zatím neimplementováno) ──

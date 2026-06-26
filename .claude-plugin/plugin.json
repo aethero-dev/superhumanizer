@@ -1,0 +1,13 @@
+{
+  "name": "superhumanizer",
+  "description": "Odstraní znaky AI-generovaného psaní z textu a přepíše ho do přirozeného lidského stylu. CZ + EN. Pojmenované ToV profily, /write-for-me, /ai-check.",
+  "version": "1.5.0",
+  "author": {
+    "name": "aethero",
+    "url": "https://aethero.cz"
+  },
+  "homepage": "https://github.com/aethero-dev/superhumanizer",
+  "repository": "https://github.com/aethero-dev/superhumanizer",
+  "license": "MIT",
+  "keywords": ["ai-detection", "humanizer", "writing", "tone-of-voice", "czech", "english"]
+}

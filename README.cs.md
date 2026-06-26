@@ -26,18 +26,30 @@ SuperHumanizer to opravuje celé. Jeden příkaz. Funguje v češtině i anglič
 
 ## Instalace
 
+### Claude Code — plugin (doporučeno, auto-update)
+
+```
+/plugin marketplace add aethero-dev/superhumanizer
+/plugin install superhumanizer@aethero
+```
+
+Pak `/reload-plugins`. Zapni auto-update v `/plugin` → **Marketplaces** a nové verze ti dotečou samy —
+žádné nové stahování. Obsahuje skill **i** slash-commandy (`/humanize`, `/write-for-me`, `/ai-check`,
+`/new-tov`, `/list-tov`). Jen CLI terminál.
+
 ### Claude.ai (Skills UI)
 
 1. Otevři [claude.ai](https://claude.ai) → Settings → Skills
 2. Klikni **New skill**
-3. Vlož obsah souboru [`SKILL.md`](SKILL.md)
+3. Vlož obsah souboru [`skills/superhumanizer/SKILL.md`](skills/superhumanizer/SKILL.md)
 4. Ulož
 
-### Claude Code / jiný agent se support pro skills
+### Ručně (git clone — bez auto-update)
 
 ```bash
-git clone https://github.com/aethero-dev/superhumanizer ~/.claude/skills/superhumanizer
+git clone https://github.com/aethero-dev/superhumanizer
 ```
+Nasměruj agenta na `skills/superhumanizer/SKILL.md`. Pro update si musíš sám udělat `git pull`.
 
 ---
 

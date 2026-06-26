@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "name": "aethero",
+  "owner": {
+    "name": "aethero",
+    "url": "https://aethero.cz"
+  },
+  "plugins": [
+    {
+      "name": "superhumanizer",
+      "source": ".",
+      "version": "1.5.0",
+      "description": "Odstraní znaky AI-generovaného psaní z textu a přepíše ho do přirozeného lidského stylu (CZ + EN)."
+    }
+  ]
+}
