@@ -130,11 +130,15 @@ SuperHumanizer includes 27 patterns specific to Czech AI writing:
 
 ## Standing on the shoulders of giants
 
-- **[blader/humanizer](https://github.com/blader/humanizer)** (26k ⭐, MIT) — English pattern foundation
-- **[bejek/humanizer-czech](https://github.com/bejek/humanizer-czech)** (21 ⭐, MIT) — Czech-specific patterns
-- **[harshaneel/humanize](https://github.com/harshaneel/humanize)** (52 ⭐, MIT) — detection science + /ai-check
+This project builds directly on three openly-licensed (MIT) skills. Genuine thanks to their authors:
+
+- **[blader/humanizer](https://github.com/blader/humanizer)** by **Siqi Chen** (26k ⭐, MIT) — English pattern foundation
+- **[bejek/humanizer-czech](https://github.com/bejek/humanizer-czech)** by **Martin Čapoun** (21 ⭐, MIT) — Czech-specific patterns
+- **[harshaneel/humanize](https://github.com/harshaneel/humanize)** by **Harshaneel Gokhale** (52 ⭐, MIT) — detection science + /ai-check
 
 Pattern source: [Wikipedia:Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)
+
+Full attribution, what we took from each, and their license notices: see [CREDITS.md](CREDITS.md).
 
 ---
 

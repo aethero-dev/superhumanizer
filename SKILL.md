@@ -490,7 +490,8 @@ Flag jen **clustery** příznaků, ne izolované instance:
 ## Reference
 
 - [Wikipedia:Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)
-- [blader/humanizer](https://github.com/blader/humanizer) — základ EN skill (MIT, 26k ⭐)
-- [bejek/humanizer-czech](https://github.com/bejek/humanizer-czech) — CZ vzorce (MIT, 21 ⭐)
-- [harshaneel/humanize](https://github.com/harshaneel/humanize) — vědecký rámec + /ai-check (MIT, 52 ⭐)
+- [blader/humanizer](https://github.com/blader/humanizer) — Siqi Chen, základ EN skill (MIT, 26k ⭐)
+- [bejek/humanizer-czech](https://github.com/bejek/humanizer-czech) — Martin Čapoun, CZ vzorce (MIT, 21 ⭐)
+- [harshaneel/humanize](https://github.com/harshaneel/humanize) — Harshaneel Gokhale, vědecký rámec + /ai-check (MIT, 52 ⭐)
 - Wu et al. 2025, Mitchell et al. 2023, AAAI 2025 shared task corpus
+- Plné poděkování a licenční doložky: viz [CREDITS.md](CREDITS.md)

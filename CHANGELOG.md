@@ -10,6 +10,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Bilingvní šablony nabídky zdrojů (CZ + EN)
 - Sekce „První spuštění" — uvítání a volba základní očista vs. postavit vlastní hlas
 - Ochrana proti cizí ruce — vzorky zjevně psané AI/někým jiným se neberou jako vzor hlasu
+- CREDITS.md — čisté poděkování a MIT licenční doložky tří zdrojových projektů (Siqi Chen, Martin Čapoun, Harshaneel Gokhale); jména autorů doplněna do README (EN+CS) i SKILL.md
 
 ## [1.1.0] — 2026-06-26
 

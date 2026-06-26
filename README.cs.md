@@ -129,11 +129,15 @@ neskončila ve verzování. Slug je všude stejný: soubor `dk_tov.md` ↔ pří
 
 ## Stojíme na ramenou obrů
 
-- **[blader/humanizer](https://github.com/blader/humanizer)** (26k ⭐, MIT) — základ anglických vzorců
-- **[bejek/humanizer-czech](https://github.com/bejek/humanizer-czech)** (21 ⭐, MIT) — české vzorce
-- **[harshaneel/humanize](https://github.com/harshaneel/humanize)** (52 ⭐, MIT) — vědecký rámec + /ai-check
+Tenhle projekt staví přímo na třech skillech vydaných pod MIT licencí. Upřímné díky jejich autorům:
+
+- **[blader/humanizer](https://github.com/blader/humanizer)** od **Siqi Chena** (26k ⭐, MIT) — základ anglických vzorců
+- **[bejek/humanizer-czech](https://github.com/bejek/humanizer-czech)** od **Martina Čapouna** (21 ⭐, MIT) — české vzorce
+- **[harshaneel/humanize](https://github.com/harshaneel/humanize)** od **Harshaneela Gokhaleho** (52 ⭐, MIT) — vědecký rámec + /ai-check
 
 Zdroj vzorců: [Wikipedia:Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)
+
+Plné poděkování, co jsme z čeho převzali a jejich licenční doložky: viz [CREDITS.md](CREDITS.md).
 
 ---
 
