@@ -1,13 +1,15 @@
 ---
 name: SuperHumanizer
-version: 1.0.0
+version: 1.1.0
 description: |
   Odstraň znaky AI-generovaného psaní z textu a přepiš ho do přirozeného lidského stylu.
   Použij kdykoliv uživatel napíše /humanize, "humanizuj", "přepiš jako člověk", "zní to jako AI",
   "udělej to přirozenější", "zbav to AI stopáčků" nebo pošle text s žádostí aby nezněl strojově.
-  Funguje pro češtinu i angličtinu. Podporuje voice calibration (ToV) — pokud uživatel přiloží
-  ukázku svého psaní, skill přizpůsobí styl. Volitelný příkaz /ai-check spustí forenzní analýzu
-  textu bez přepisu.
+  Funguje pro češtinu i angličtinu. Podporuje pojmenované ToV profily — uživatel si vytvoří
+  libovolný počet hlasů (jeden na každou roli/personu) příkazem /new-tov a pak píše konkrétním
+  hlasem přes /humanize-<slug> (např. /humanize-dk_tov). /list-tov vypíše dostupné profily.
+  Lze i jednorázová voice calibration vložením ukázky psaní. Volitelný příkaz /ai-check spustí
+  forenzní analýzu textu bez přepisu.
 ---
 
 # SuperHumanizer — odstraň AI vzorce z textu
@@ -21,12 +23,34 @@ Grounded in: Wikipedia:Signs of AI writing, Wu et al. 2025, Mitchell et al. 2023
 
 ## Jak spustit
 
-**Základní použití:**
+**Základní použití (nabídne ti existující hlasy nebo základní očistu):**
 ```
 /humanize [text]
 ```
 
-**S voice calibration (přizpůsobení ToV):**
+**Jen základní očista, bez ToV profilu (odstraní to nejhorší):**
+```
+/humanize-without-tov [text]
+```
+
+**Přepis konkrétním uloženým hlasem (ToV profil):**
+```
+/humanize-dk_tov [text]    ← píše hlasem profilu "dk_tov"
+/humanize-ae_tov [text]    ← píše hlasem profilu "ae_tov"
+```
+(`-<slug>` za /humanize = přesný název profilu. Funguje i `/humanize dk_tov [text]`.)
+
+**Vytvoř nový pojmenovaný hlas (wizard):**
+```
+/new-tov                   ← provede tě nastavením, zeptá se na název a zdroje
+```
+
+**Vypiš dostupné hlasy:**
+```
+/list-tov
+```
+
+**Jednorázová voice calibration bez ukládání:**
 ```
 /humanize [text]
 Ukázka mého psaní: [tvůj vlastní text]
@@ -73,7 +97,88 @@ Pokud uživatel přiloží ukázku svého vlastního psaní, analyzuj ji **před
 
 Pak replikuj tyto vzorce v přepisu — nejen odstraň AI, ale nahraď je vzorci z ukázky.
 
-Pokud ukázka chybí: přirozený, variovaný, názorový hlas (viz sekce Osobnost níže).
+Pokud ukázka chybí a není zadán uložený profil: přirozený, variovaný, názorový hlas (viz sekce Osobnost níže).
+
+---
+
+## Pojmenované ToV profily — uložené hlasy
+
+Uživatel může mít **libovolný počet** uložených hlasů, jeden na každou roli/personu (osobní,
+firemní, konkrétní klient, role „CEO" vs role „kamarád"…). Každý profil má **slug**
+(např. `dk_tov`, `ae_tov`) a používá se příponou: `/humanize-dk_tov [text]`.
+
+**Slug je všude tentýž řetězec** — v příkazu, v názvu souboru i ve výpisu. Nikdy ho nekomoli,
+neprohazuj ani nezkracuj (žádné `tov-dk` vs `dk`). `<slug>` v příkazu `/humanize-<slug>` = přesně
+název souboru `<slug>.md`.
+
+**Kde profily žijí:**
+`~/.claude/skills/.superhumanizer-tov/<slug>.md`  (např. `dk_tov.md`)
+
+Tato složka je **záměrně mimo repo skillu** — profily obsahují osobní/firemní data a NESMÍ se
+commitnout do veřejného repozitáře. Pokud složka neexistuje, vytvoř ji při prvním `/new-tov`.
+(Na claude.ai, kde není trvalý zápis do FS, degraduj na: profil vypiš uživateli a popros ho,
+aby si jeho text uložil a vkládal ho jako ukázku — viz jednorázová voice calibration výše.)
+
+**Formát souboru `<slug>.md`:**
+```
+# ToV profil: <Název> (<slug>)
+Vytvořeno: <datum> · Zdroje: <Slack/Gmail/posty/chat/ručně…>
+
+## Kdo / kdy použít
+<1–2 věty: jaká role, kdy se hodí tenhle hlas>
+
+## Vzorce hlasu
+- Délka a rytmus vět: …
+- Slovní zásoba a registr: …
+- Jak začíná / strukturuje: …
+- Interpunkce a formátování: …
+- Opakující se obraty a tiky: …
+- Přechody: …
+- Oslovení / podpis / emoji: …
+
+## Ukázky (3–5 reprezentativních úryvků)
+> …
+
+## Čeho se vyvarovat (anti-vzorce tohoto hlasu)
+- …
+```
+
+**Při `/humanize-<slug>`:** načti `<slug>.md` a piš striktně podle „Vzorce hlasu". Profil má
+přednost před výchozím hlasem; jednorázová `Ukázka mého psaní:` v promptu má přednost před profilem.
+Pokud slug neexistuje, vypiš dostupné profily (jako `/list-tov`) a zeptej se.
+
+---
+
+## /new-tov — vytvoř nový hlas (wizard)
+
+Cíl: postavit nový `<slug>.md` a uložit ho. Veď uživatele krok po kroku, neptej se na všechno najednou.
+
+1. **Název a slug.** Zeptej se, jak hlas pojmenovat („osobní David", „aethero firemní"…) a odvoď
+   slug s jednotnou koncovkou `_tov` (`dk_tov`, `ae_tov`). Tenhle slug se použije všude stejně —
+   v příkazu i v názvu souboru. Pokud slug existuje, nabídni přepsání nebo jiný název.
+2. **Role.** Jednou větou: kdy se tenhle hlas používá. Uloží se do „Kdo / kdy použít".
+3. **Zdroje ukázek.** Nabídni a posbírej z čehokoliv dostupného (čím víc registrů, tím lepší):
+   - **Slack** — konverzace uživatele (DM i kanály); použij Slack MCP, hledej zprávy psané JÍM.
+   - **Gmail** — odeslané maily; přes Gmail MCP, filtruj delší, jím psané (ne forwardy/jednovětné).
+   - **Veřejné posty** — texty co dává ven (LinkedIn, blog…); pokud nejsou přístupné přes MCP,
+     popros o vložení nebo odkaz.
+   - **Chat tady** — jak píše v této a minulých Claude Code session.
+   - **Ručně vložené ukázky** — vždy funkční záloha; popros o 3–5 úryvků.
+   Když některý zdroj není dostupný, řekni to a jeď dál s tím, co je.
+4. **Analýza.** Projeď posbírané vzorky a vytáhni vzorce hlasu (stejných 6 os jako voice calibration
+   + oslovení/podpis/emoji). Pokud máš víc registrů (formální mail vs hovorový Slack), zachyť rozsah:
+   popiš, kdy hlas přepíná mezi formálnějším a uvolněnějším.
+5. **Ulož.** Zapiš `<slug>.md` (např. `dk_tov.md`) do `~/.claude/skills/.superhumanizer-tov/`.
+6. **Potvrď.** Řekni uživateli: jak se profil jmenuje, čím ho spustí (`/humanize-<slug>`), kam se
+   uložil a jak ho upravit (znovu `/new-tov` se stejným názvem, nebo ručně editovat ten soubor).
+
+---
+
+## /list-tov — vypiš dostupné hlasy
+
+Přečti `~/.claude/skills/.superhumanizer-tov/*.md` (vynech `README.md`) a vypiš tabulku: **slug**
+(= název souboru bez `.md`), **název**, **kdy použít** (z hlavičky profilu), příkaz
+(`/humanize-<slug>`). Pokud složka/profily neexistují, řekni to a nabídni `/new-tov`.
 
 ---
 
@@ -252,12 +357,26 @@ Zvol styl výstupu:
 ## Proces
 
 1. Přečti vstup a zjisti jazyk (CZ / EN / mix)
-2. Zeptej se na styl pokud nebyl zadán; zkontroluj zda je přiložena ukázka pro voice calibration
-3. Identifikuj AI vzorce (nejprve RLHF artefakty, pak strukturální, pak lexikální)
-4. Napiš **draft přepisu** — aplikuj všech 9 pák
-5. **Anti-AI audit:** "Co na tomhle textu ještě křičí AI?" — odpověz 3–5 body
-6. Napiš **finální přepis** který adresuje zbývající problémy
-7. Volitelně: stručné shrnutí změn
+2. **Vyřeš hlas — vždy nabídni volbu u holého `/humanize`:**
+   - Zadal uživatel konkrétní profil (`/humanize-<slug>`)? → načti `<slug>.md`, jeď bez ptaní.
+   - Přiložil ukázku psaní v promptu? → jednorázová voice calibration, má přednost.
+   - Zadal `/humanize-without-tov`? → jeď základní očistou (9 pák, žádná ToV personalizace), bez ptaní.
+   - Holé `/humanize` a **existují profily**? → vypiš je a nech vybrat:
+     „Mám hlasy: <list slug — kdy použít>. Co použít?
+      • některý hlas → `/humanize-<slug>`
+      • nový hlas → `/new-tov`
+      • bez hlasu, jen základní očista → `/humanize-without-tov`"
+   - Holé `/humanize` a **žádné profily**? → nabídni dvě cesty:
+     „Zatím nemáš žádný ToV hlas. Můžu:
+      • udělat základní očistu (odstraním to nejhorší) → `/humanize-without-tov`
+      • nebo postavit tvůj hlas a psát přímo tebou → `/new-tov`"
+   Nezačínej přepisovat, dokud uživatel nevybere (u holého `/humanize`).
+3. Zeptej se na styl pokud nebyl zadán a nepoužívá se profil (profil styl většinou určí sám)
+4. Identifikuj AI vzorce (nejprve RLHF artefakty, pak strukturální, pak lexikální)
+5. Napiš **draft přepisu** — aplikuj všech 9 pák (a vzorce hlasu, pokud je profil)
+6. **Anti-AI audit:** "Co na tomhle textu ještě křičí AI?" — odpověz 3–5 body
+7. Napiš **finální přepis** který adresuje zbývající problémy
+8. Volitelně: stručné shrnutí změn
 
 **Output format:**
 1. Draft přepisu

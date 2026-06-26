@@ -3,6 +3,18 @@
 All notable changes to SuperHumanizer will be documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.1.0] — 2026-06-26
+
+### Added
+- Pojmenované ToV profily — libovolný počet uložených hlasů, jeden na roli/personu
+- `/new-tov` — wizard na vytvoření hlasu z reálných zdrojů (Slack, Gmail, veřejné posty, chat, ruční ukázky)
+- `/humanize-<slug>` — přepis konkrétním uloženým hlasem (např. `/humanize-dk`)
+- `/list-tov` — výpis dostupných profilů a kdy je použít
+- Profily se ukládají mimo repo (`~/.claude/skills/.superhumanizer-tov/`), aby osobní data neunikla do veřejného repozitáře
+- `/humanize` nabídne existující profily na začátku a upozorní na `/new-tov`, když žádné nejsou
+- `/humanize-without-tov` — základní očista bez ToV profilu (odstraní jen to nejhorší)
+- Interaktivní volba u holého `/humanize`: vyber hlas / vytvoř nový / jeď bez hlasu
+
 ## [1.0.0] — 2026-06-26
 
 ### Added
