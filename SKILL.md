@@ -1,15 +1,16 @@
 ---
 name: SuperHumanizer
-version: 1.2.0
+version: 1.3.0
 description: |
   Odstraň znaky AI-generovaného psaní z textu a přepiš ho do přirozeného lidského stylu.
   Použij kdykoliv uživatel napíše /humanize, "humanizuj", "přepiš jako člověk", "zní to jako AI",
   "udělej to přirozenější", "zbav to AI stopáčků" nebo pošle text s žádostí aby nezněl strojově.
+  Umí i /write-for-me (/napiš-mi) — napíše nový text rovnou lidsky, ne jen opraví hotový.
   Funguje pro češtinu i angličtinu. Podporuje pojmenované ToV profily — uživatel si vytvoří
   libovolný počet hlasů (jeden na každou roli/personu) příkazem /new-tov a pak píše konkrétním
-  hlasem přes /humanize-<slug> (např. /humanize-dk_tov). /list-tov vypíše dostupné profily.
-  Lze i jednorázová voice calibration vložením ukázky psaní. Volitelný příkaz /ai-check spustí
-  forenzní analýzu textu bez přepisu.
+  hlasem přes /humanize-<slug> nebo /write-for-me-<slug> (např. /humanize-dk_tov). /list-tov vypíše
+  dostupné profily. Lze i jednorázová voice calibration vložením ukázky psaní. Volitelný příkaz
+  /ai-check spustí forenzní analýzu textu bez přepisu.
 ---
 
 # SuperHumanizer — odstraň AI vzorce z textu
@@ -49,6 +50,15 @@ Grounded in: Wikipedia:Signs of AI writing, Wu et al. 2025, Mitchell et al. 2023
 ```
 /list-tov
 ```
+
+**Napiš nový text rovnou lidsky (ne přepis — generování od nuly):**
+```
+/write-for-me [zadání]          ← napíše text, co nezní jako AI
+/napiš-mi [zadání]              ← totéž česky
+/write-for-me-dk_tov [zadání]   ← napíše rovnou tvým hlasem (ToV profil)
+```
+(`/humanize` opravuje hotový text; `/write-for-me` ho rovnou napíše. Lze si namapovat jako výchozí
+příkaz pro psaní místo `/humanize`.)
 
 **Jednorázová voice calibration bez ukládání:**
 ```
@@ -238,6 +248,33 @@ basic cleanup now (`/humanize-without-tov`), or first build your own voice so it
 Přečti `~/.claude/skills/.superhumanizer-tov/*.md` (vynech `README.md`) a vypiš tabulku: **slug**
 (= název souboru bez `.md`), **název**, **kdy použít** (z hlavičky profilu), příkaz
 (`/humanize-<slug>`). Pokud složka/profily neexistují, řekni to a nabídni `/new-tov`.
+
+---
+
+## /write-for-me (/napiš-mi) — napiš rovnou lidsky
+
+Generativní protějšek `/humanize`. Zatímco `/humanize` opravuje hotový text, tohle text **rovnou napíše**
+na zadání — tak, aby od začátku nezněl jako AI. Uživatel si to může namapovat jako svůj výchozí příkaz
+pro psaní místo `/humanize`. Bilingvní: `/write-for-me` = `/napiš-mi`.
+
+**Klíčové pravidlo:** NEgeneruj nejdřív AI-znějící draft a pak ho nečisti. Piš rovnou lidsky — aplikuj
+všech 9 pák a (pokud je) ToV profil už při psaní. Detektor by neměl mít co chytit ani v prvním tahu.
+
+**Vstup:** zadání, ne hotový text — téma, formát (mail / blog / post / bio…), délka, publikum, cíl.
+Pokud klíčové parametry chybí (hlavně formát, délka, komu to je), krátce se doptej, než začneš.
+
+**Hlas:** stejná logika jako u `/humanize`:
+- `/write-for-me-<slug>` → načti `<slug>.md`, piš tím hlasem, bez ptaní.
+- Holé `/write-for-me` a existují profily → nabídni je (+ `/new-tov`, + bez hlasu).
+- Žádné profily → napiš v přirozeném názorovém hlase (viz Osobnost), zmiň `/new-tov`.
+
+**Proces:**
+1. Ujasni zadání (doptej se jen na to, co opravdu chybí).
+2. Vyřeš hlas (viz výše).
+3. Napiš **draft** rovnou lidsky — 9 pák + ToV při psaní.
+4. **Anti-AI audit:** „Co na tomhle ještě křičí AI?" — 3–5 bodů.
+5. **Finální verze** adresující zbytky.
+6. (volitelně) stručně, co jsi vědomě hlídal.
 
 ---
 

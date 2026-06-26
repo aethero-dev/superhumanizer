@@ -3,6 +3,12 @@
 All notable changes to SuperHumanizer will be documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.3.0] — 2026-06-26
+
+### Added
+- `/write-for-me` (`/napiš-mi`) — generativní protějšek `/humanize`: napíše nový text rovnou lidsky, místo aby opravoval hotový. Bere ToV profily (`/write-for-me-<slug>`), lze si namapovat jako výchozí příkaz pro psaní
+- `CREDITS.md` rozšířen o pokorný rámec: žádný nárok na původní výzkum, jde o chytrou syntézu a propojení tří MIT projektů (CZ+EN)
+
 ## [1.2.0] — 2026-06-26
 
 ### Added

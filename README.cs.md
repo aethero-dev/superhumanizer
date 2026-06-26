@@ -70,9 +70,14 @@ Vytvoř si libovolný počet uložených hlasů — jeden na každou roli/person
 ```
 /new-tov              ← průvodce: pojmenuje hlas, přečte tvoje zdroje, postaví profil
 /humanize-dk_tov      ← přepiš hlasem „dk_tov"
+/write-for-me-dk_tov  ← napiš nový text od nuly hlasem „dk_tov"
 /list-tov             ← vypiš uložené hlasy
 /humanize-without-tov ← základní očista, bez profilu
 ```
+
+`/write-for-me` (alias `/napiš-mi`) je generativní protějšek `/humanize`: místo opravy hotového
+textu ho rovnou napíše ze zadání, aby vůbec nezněl jako AI. Můžeš si ho namapovat jako svůj
+výchozí příkaz pro psaní.
 
 `/new-tov` se neptá suše — provede tě tím (v tvém jazyce, CZ i EN). Nabídne, z čeho tě umí přečíst
 (Slack, Gmail, Google Docs, veřejné posty, tenhle chat, nebo vložené ukázky), ukáže ti nalezené markery
@@ -129,7 +134,9 @@ neskončila ve verzování. Slug je všude stejný: soubor `dk_tov.md` ↔ pří
 
 ## Stojíme na ramenou obrů
 
-Tenhle projekt staví přímo na třech skillech vydaných pod MIT licencí. Upřímné díky jejich autorům:
+SuperHumanizer si nečiní nárok na původní výzkum. Je to chytrá syntéza tří existujících
+MIT skillů plus pár vyladěných nastavení pro lepší použitelnost. Hodnota je v propojení a
+vzájemném obohacení těch částí, které dohromady tvoří výbornou souhru. Upřímné díky jejich autorům:
 
 - **[blader/humanizer](https://github.com/blader/humanizer)** od **Siqi Chena** (26k ⭐, MIT) — základ anglických vzorců
 - **[bejek/humanizer-czech](https://github.com/bejek/humanizer-czech)** od **Martina Čapouna** (21 ⭐, MIT) — české vzorce

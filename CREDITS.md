@@ -1,10 +1,18 @@
 # Credits & acknowledgements
 
-SuperHumanizer nevznikl na zelené louce. Stojí na práci tří lidí, kteří svoje skilly dali
-veřejně k dispozici pod MIT licencí. Bez nich by tenhle projekt neexistoval — díky.
+SuperHumanizer nevznikl na zelené louce a nedělá si nárok na původní výzkum. Je to chytrá
+syntéza tří existujících projektů plus pár vyladěných nastavení, aby se skill dobře používal.
+Hodnota není v tom, že bychom vymysleli něco nového. Je v propojení a vzájemném obohacení těch
+tří částí, které dohromady tvoří výbornou souhru. To je to, co jsme dali dohromady.
 
-SuperHumanizer wouldn't exist without three people who released their work openly under MIT.
-Genuine thanks to all of them.
+Všechny tři skilly jejich autoři vydali veřejně pod MIT licencí. Bez nich by tenhle projekt
+neexistoval. Díky.
+
+SuperHumanizer makes no claim to original research. It's a smart synthesis of three existing
+projects plus a few tuned settings to make the skill pleasant to use. The value isn't in
+inventing something new. It's in connecting and cross-pollinating those three parts into one
+that works well together. That's what we put together. Genuine thanks to all three authors,
+who released their work openly under MIT.
 
 ---
 

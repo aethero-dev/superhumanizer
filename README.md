@@ -70,9 +70,14 @@ Build as many saved voices as you like — one per role or persona — and write
 ```
 /new-tov              ← guided setup: names the voice, reads your sources, builds the profile
 /humanize-dk_tov      ← rewrite in the "dk_tov" voice
+/write-for-me-dk_tov  ← write new text from scratch in the "dk_tov" voice
 /list-tov             ← list your saved voices
 /humanize-without-tov ← basic cleanup, no profile
 ```
+
+`/write-for-me` (alias `/napiš-mi`) is the generative twin of `/humanize`: instead of fixing
+finished text, it writes new text from a brief so it never sounds like AI in the first place.
+You can map it as your default writing command.
 
 `/new-tov` doesn't just ask questions — it walks you through it (in your language, EN or CZ). It offers
 the sources it can read you from (Slack, Gmail, Google Docs, public posts, this chat, or pasted samples),
@@ -130,7 +135,10 @@ SuperHumanizer includes 27 patterns specific to Czech AI writing:
 
 ## Standing on the shoulders of giants
 
-This project builds directly on three openly-licensed (MIT) skills. Genuine thanks to their authors:
+SuperHumanizer makes no claim to original research. It's a smart synthesis of three existing
+MIT-licensed skills, plus a few tuned settings to make it pleasant to use. The value is in
+connecting and cross-pollinating those parts into one that works well together. Genuine thanks
+to their authors:
 
 - **[blader/humanizer](https://github.com/blader/humanizer)** by **Siqi Chen** (26k ⭐, MIT) — English pattern foundation
 - **[bejek/humanizer-czech](https://github.com/bejek/humanizer-czech)** by **Martin Čapoun** (21 ⭐, MIT) — Czech-specific patterns
