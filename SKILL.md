@@ -554,3 +554,24 @@ Flag jen **clustery** příznaků, ne izolované instance:
 - [harshaneel/humanize](https://github.com/harshaneel/humanize) — Harshaneel Gokhale, vědecký rámec + /ai-check (MIT, 52 ⭐)
 - Wu et al. 2025, Mitchell et al. 2023, AAAI 2025 shared task corpus
 - Plné poděkování a licenční doložky: viz [CREDITS.md](CREDITS.md)
+
+<!--
+  ── INTERNÍ / ROADMAP: ToV profil z externího brand-voice zdroje (zatím neimplementováno) ──
+
+  Idea: ToV profil nemusí být ručně psaný snapshot, ale může se generovat z brand-voice systému,
+  kde už hlas žije jako zdroj pravdy. Pro aethero/foxy je to `ydentyty` (MCP brand vault).
+
+  Mechanismus (cesta "live"):
+  - V `<slug>.md` hlavičce volitelně pole `brand_source: ydentyty:<brand_id>` (např. ydentyty:aethero).
+  - Při `/humanize-<slug>` nebo `/write-for-me-<slug>`: pokud je `brand_source` nastaven, vytáhni
+    aktuální voice přes MCP `get_brand_section(brand_id, "voice")` a piš podle něj — má přednost
+    před lokálním snapshotem. Single source of truth, změna v ydentyty se propíše všude.
+  - ydentyty voice nese: tone (coreSentence, axes, archetypy), language.forbidden (+důvody/alternativy),
+    language.rules (tykání, věta max 20, headline max 8, CTA max 5, odstavec 1-2 věty, emoji v body),
+    naming, personas. Mapuj 1:1 na "Vzorce hlasu" + "Zakázaná slova".
+  - Fallback: když MCP nedostupné (claude.ai, chybějící scope) → použij poslední lokální snapshot
+    a řekni uživateli, že jedeš z cache. Pozn.: vault přístup je per-brand scoped.
+
+  Tohle drží profily srovnané s oficiálním brandem (ae_tov se kdysi z webu sekl: vykání vs tykání).
+-->
+
