@@ -3,6 +3,14 @@
 All notable changes to SuperHumanizer will be documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.4.0] — 2026-06-26
+
+### Added
+- Pravé slash-commandy ve složce `commands/` — `/humanize`, `/write-for-me`, `/napis-mi`, `/ai-check`, `/new-tov`, `/list-tov`, `/humanize-without-tov`; po instalaci do `~/.claude/commands/` se zobrazí v nápovědě
+- `/new-tov` nově generuje per-profil commandy (`/humanize-<slug>`, `/write-for-me-<slug>`) rovnou do `~/.claude/commands/` (osobní, mimo repo)
+- README: instalační návod na slash-commandy
+- SKILL.md: sekce vysvětlující dva způsoby spuštění (přirozený trigger vs. nainstalovaný slash-command)
+
 ## [1.3.0] — 2026-06-26
 
 ### Added

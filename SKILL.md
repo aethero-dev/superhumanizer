@@ -1,6 +1,6 @@
 ---
 name: SuperHumanizer
-version: 1.3.0
+version: 1.4.0
 description: |
   Odstraň znaky AI-generovaného psaní z textu a přepiš ho do přirozeného lidského stylu.
   Použij kdykoliv uživatel napíše /humanize, "humanizuj", "přepiš jako člověk", "zní to jako AI",
@@ -74,6 +74,23 @@ Ukázka mého psaní: [tvůj vlastní text]
 **Volitelně — specifikuj styl výstupu:**
 - akademický, formální, přátelský, konverzační
 - pokud nezadáš, Claude se zeptá
+
+## Slash-commandy vs. přirozené triggery
+
+Skill jde spustit dvěma způsoby — fungují oba:
+
+1. **Přirozeně.** Napiš trigger jako běžný text („humanizuj tohle…", „napiš mi…") nebo aktivuj skill
+   přes `/superhumanizer`. Model si poradí, protože má skill načtený.
+2. **Jako pravé slash-commandy.** V `commands/` jsou wrappery, které po nainstalování do
+   `~/.claude/commands/` (nebo projektového `.claude/commands/`) dají `/humanize`, `/write-for-me`,
+   `/napis-mi`, `/ai-check`, `/new-tov`, `/list-tov`, `/humanize-without-tov` — i s popisem v nápovědě (`/`).
+   Pohodlnější pro časté použití a pro lidi, co chtějí strukturu za lomítkem.
+
+Per-profil commandy (`/humanize-<slug>`, `/write-for-me-<slug>`) generuje `/new-tov` při vytvoření
+profilu rovnou do `~/.claude/commands/` — ty jsou osobní a nepatří do repa.
+
+Pozn.: čistý slash `/humanize-<slug>` funguje jen jako nainstalovaný command. Bez instalace ho napiš
+jako text — Claude Code by samostatný neznámý `/příkaz` jinak odmítl jako „Unknown command".
 
 ## Co detektory měří — mentální model
 
@@ -191,8 +208,13 @@ za krokem, sám nabídni z čeho umíš číst, projdi s ním nálezy a nech ho 
 6. **Ukaž draft profilu ke schválení.** Shrň vzorce hlasu (6 os voice calibration + oslovení/podpis/emoji
    + anti-vzorce) a nech doladit, než uložíš.
 7. **Ulož.** Zapiš `<slug>.md` (např. `dk_tov.md`) do `~/.claude/skills/.superhumanizer-tov/`.
-8. **Potvrď a navigačně uzavři.** Řekni: jak se profil jmenuje, čím ho spustí (`/humanize-<slug>`),
-   kam se uložil a jak ho upravit (znovu `/new-tov` se stejným názvem, nebo ručně editovat soubor).
+8. **Vygeneruj per-profil slash-commandy.** Vytvoř v `~/.claude/commands/` dva soubory, aby měl
+   uživatel profil rovnou za lomítkem i v nápovědě (viz „Slash-commandy" níže):
+   `humanize-<slug>.md` a `write-for-me-<slug>.md`. Per-profil commandy jsou osobní → jen do
+   `~/.claude/commands/`, NIKDY ne do repa (obsahují odkaz na soukromý profil).
+9. **Potvrď a navigačně uzavři.** Řekni: jak se profil jmenuje, čím ho spustí (`/humanize-<slug>`
+   nebo `/write-for-me-<slug>`), kam se uložil a jak ho upravit (znovu `/new-tov` se stejným názvem,
+   nebo ručně editovat soubor).
 
 ### Šablona nabídky zdrojů — CZ
 
