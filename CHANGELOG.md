@@ -3,6 +3,19 @@
 All notable changes to SuperHumanizer will be documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.6.0] — 2026-10-10
+
+### Added
+- **Model-specific tells (2026)** — nová sekce: GPT (korektivní „rather than/not simply", negative antithesis), Claude (superlativy „single most", „seamslop"), Gemini (formální „furthermore"); + univerzální 2026 tiky
+- **LLM-safe truths** — nový vzorec (prázdné pravdy „Consistency is important." / „Důslednost je důležitá.")
+- **Neutrální emoční teplota** jako explicitní signál (AI drží neutrál, kde téma volá po postoji)
+- Nové abstraktní fillery do zakázaných slov: quietly, quiet, shift, matters, land, actually, interplay, testament
+- Sekce **„Co skill NEumí"** — poctivý limit: watermarking (SynthID) a C2PA provenance se humanizací neobejdou; bypass není záruka
+
+### Changed
+- **Em dash přehodnocen (2026 data)** — už NENÍ plošný signál. Claude Opus 5 ho používá skoro jako člověk, Gemini míň. Jádro teď řeší em dash jen v clusteru a model-aware; ToV profily uživatele (kde je zakázaný) ho dál mažou tvrdě
+- Grounding doplněn o zdroje 2026 (Graphite, Pew, Forbes)
+
 ## [1.5.0] — 2026-06-26
 
 ### Changed

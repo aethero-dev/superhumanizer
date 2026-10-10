@@ -1,6 +1,6 @@
 ---
 name: SuperHumanizer
-version: 1.5.0
+version: 1.6.0
 description: |
   Odstraň znaky AI-generovaného psaní z textu a přepiš ho do přirozeného lidského stylu.
   Použij kdykoliv uživatel napíše /humanize, "humanizuj", "přepiš jako člověk", "zní to jako AI",
@@ -19,6 +19,7 @@ Jsi editor textu, který identifikuje a odstraňuje znaky AI-generovaného psan�
 aby text zněl přirozeně, autenticky a lidsky — ne sterilně "vyčištěně".
 
 Grounded in: Wikipedia:Signs of AI writing, Wu et al. 2025, Mitchell et al. 2023, AAAI 2025 shared task corpus.
+Aktualizováno 2026-10 o model-specific tells a posuny v detekci (Graphite „AI Tells" 7000+ vzorků, Pew 2026, Forbes 2026).
 
 ---
 
@@ -106,7 +107,7 @@ Výstup musí posunout VŠECHNY z nich směrem k lidskému psaní, ne jen jeden 
 | **Structural markers** | Bullet listy na vše; číslované kroky; přemíra podnadpisů | Plynoucí próza; struktura vyplývá z obsahu, není mu vnucená |
 | **Personal/emotional specificity** | Generická, neutrální, na každého aplikovatelná tvrzení | Konkrétní: přesná čísla, pojmenované příklady, časové kotvy |
 | **POS density** | Vysoká hustota přídavných jmen a pomocných sloves | Podstatná jména a slovesa dělají těžkou práci; adjektiva si zasloužená |
-| **Punctuation fingerprint** | Em dash pro dramatický efekt, přebytek středníků | Tečky dělají práci. Em dash vzácný. Středníky skoro nikdy. |
+| **Punctuation fingerprint** | Shluk em dashů pro dramatický efekt, přebytek středníků | Interpunkce odpovídá rejstříku. Em dash jen v clusteru s dalšími znaky (viz pozn. 2026 níže), ne plošně. Středníky skoro nikdy. |
 | **RLHF voice** | Chatbot obraty, ohlašování co udělám, shrnutí co jsem udělal | Prostě piš — nepotřebuješ průvodce vlastním textem |
 
 ---
@@ -312,6 +313,9 @@ Nahraď předvídatelnou slovní zásobu:
 **Zakázaná slova (EN):** delve, leverage, robust, streamline, significant, comprehensive, notably,
 it is worth noting, in today's fast-paced world, groundbreaking, revolutionary, pivotal,
 transformative, synergy, ecosystem, seamless
+**+ 2026 přírůstky (abstraktní fillery):** quietly, quiet, shift (jako „a fundamental shift"), matters
+(jako „quality matters"), land (jako „the message lands"), actually, interplay, testament. (Dle Pew 2026
+„delve/interplay/testament" výskyt 2× vzrostl — stále silné signály.)
 
 **Zakázaná slova (CZ):** revoluční, průlomový, klíčový (jako přídavné jméno), zásadní, inovativní,
 komplexní řešení, synergie, přidaná hodnota, cutting-edge, světová třída
@@ -360,11 +364,15 @@ Nahraď formulaické přechody přirozenými:
 
 ### Páka 8: Punctuation normalization
 
-- Em dash (—) → smaž nebo nahraď tečkou/čárkou
-- V češtině: krátká pomlčka (-) s mezerami, ne em dash
+- **Em dash (—) — POZOR, 2026 už není plošný signál.** Data (Graphite, Pangram): některé modely
+  (Claude Opus 5) používají em dash podobně jako lidé, jiné (Gemini) míň. Takže:
+  - Řeš em dash **jen v clusteru** s dalšími AI znaky, ne jako automatický výmaz. Přebytek shluklých
+    em dashů (3+ v krátkém odstavci, pro dramatický efekt) → proředit. Jeden dva přirozené → nech.
+  - Výjimka: pokud ToV profil uživatele em dash zakazuje (např. `dk_tov`/`ae_tov`), profil vyhrává — tam maž tvrdě.
+  - V češtině em dash stejně nepatří do běžné sazby: krátká pomlčka (-) s mezerami.
 - Středníky → skoro nikdy
 - Tučný text → jen tam kde opravdu nutný, ne jako dekorace
-- Emoji v textu → smaž
+- Emoji v textu → smaž (pokud profil nebo styl neříká jinak)
 
 ### Páka 9: Strip RLHF voice
 
@@ -443,6 +451,29 @@ surprise. (CZ ekvivalent viz „Negativní antiteze" v české sekci.)
 **Signposting:** Let's dive in, Let's explore, Here's what you need to know, Without further ado
 
 **Generic upbeat endings:** The future looks bright, exciting times ahead, together we can
+
+**Abstraktní fillery / unearned intensifiers (2026):** quietly, quiet, shift, matters, land, actually —
+znějí významně, ale nic nepřidají. Smaž, nebo nahraď konkrétem.
+
+---
+
+## Model-specific tells (2026) — který model co prozrazuje
+
+Od 2026 se signály liší podle modelu. Tiky z dat (Graphite, 7000+ vzorků) — ber jako vodítko,
+pojmenování modelů se mění:
+
+- **GPT (řada Astra):** korektivní obraty „rather than", „not simply"; ze všech modelů nejvíc pere
+  negative antithesis („not X, but Y").
+- **Claude (Opus 5):** superlativy „single most", „the most"; „seamslop" — utkví na jednom slově nebo
+  obrazu a recykluje ho skrz celý text (viz Lexical repetition). Em dash používá skoro jako člověk.
+- **Gemini (3.1 Pro):** formální přechody „furthermore", „moreover"; em dashů míň než lidé.
+
+Praktika: víš-li, z jakého modelu text je, cíl přímo jeho tikům. Když ne, projeď všechny.
+
+**Nové univerzální 2026 tiky:**
+- **LLM-safe truths** — věty pravdivé, ale prázdné: „Consistency is important.", „Quality matters."
+  CZ: „Důslednost je důležitá.", „Na detailech záleží." Řekni něco konkrétního, nebo to smaž.
+- **Neutrální emoční teplota** — AI drží neutrál i tam, kde téma volá po postoji. Zaujmi stanovisko (viz Osobnost).
 
 ---
 
@@ -556,6 +587,21 @@ Flag jen **clustery** příznaků, ne izolované instance:
 
 ---
 
+## Co skill NEumí (limit — buď poctivý)
+
+SuperHumanizer pracuje s **textem**. Umí posunout statistické signály (perplexity, burstiness, vzorce)
+tak, že perplexity-based detektory text většinou propustí. Ale:
+
+- **Watermarking a provenance neobejde.** SynthID (Google) a C2PA metadata se zapisují při *generování*,
+  na úrovni modelu, ne do slov. Přepis textu je nesmaže. Když je text takhle označený u zdroje, humanizace
+  ho neodznačí.
+- **Není to záruka.** Detektory se mění, žádný bypass není trvalý. Skóre detektoru stejně nemá stát samo —
+  false positives jsou běžné (non-native speakers i specifické styly psaní).
+- **Cíl skillu není „obelstít detektor", ale „znít lidsky".** Dobrý vedlejší efekt: lidský text detektory
+  spíš propustí. Ale hlavní metrika je čtenář, ne detektor.
+
+---
+
 ## Reference
 
 - [Wikipedia:Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)
@@ -577,11 +623,14 @@ Flag jen **clustery** příznaků, ne izolované instance:
     aktuální voice přes MCP `get_brand_section(brand_id, "voice")` a piš podle něj — má přednost
     před lokálním snapshotem. Single source of truth, změna v ydentyty se propíše všude.
   - ydentyty voice nese: tone (coreSentence, axes, archetypy), language.forbidden (+důvody/alternativy),
-    language.rules (tykání, věta max 20, headline max 8, CTA max 5, odstavec 1-2 věty, emoji v body),
+    language.rules (oslovování, věta max 20, headline max 8, CTA max 5, odstavec 1-2 věty, emoji v body),
     naming, personas. Mapuj 1:1 na "Vzorce hlasu" + "Zakázaná slova".
   - Fallback: když MCP nedostupné (claude.ai, chybějící scope) → použij poslední lokální snapshot
     a řekni uživateli, že jedeš z cache. Pozn.: vault přístup je per-brand scoped.
 
-  Tohle drží profily srovnané s oficiálním brandem (ae_tov se kdysi z webu sekl: vykání vs tykání).
+  Tohle drží profily srovnané s oficiálním brandem. Pozor: srovnání funguje jen
+  když je zdroj správně. 13. 8. 2026 se ukázalo, že ydentyty mělo u aethera chybně
+  „tykání" a ae_tov se podle něj kdysi „opravil" proti webu, který vykal správně.
+  Platí vykání; než se profil srovná podle ydentyty, ověř, že tam pravidlo sedí.
 -->
 
